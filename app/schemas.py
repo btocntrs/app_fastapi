@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 class Proveedor(BaseModel):
+    id: int | None = None
     rfc: str
     razon_social: str
     nombre_comercial: str | None = None
