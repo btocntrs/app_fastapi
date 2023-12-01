@@ -1,10 +1,26 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
+
+# Valores predeterminados o de respaldo si las variables de entorno no están definidas
+default_user = "postgres"
+default_password = "admin"
+default_host = "localhost"
+default_db_name = "postgres"
+
+# Obtener los valores de las variables de entorno si están definidas, de lo contrario, usa los valores predeterminados
+user = os.getenv("DB_USER", default_user)
+password = os.getenv("DB_PASSWORD", default_password)
+host = os.getenv("DB_HOST", default_host)
+db_name = os.getenv("DB_NAME", default_db_name)
+
+# Construir la URL de la base de datos
+DATABASE_URL = f"postgresql://{user}:{password}@{host}/{db_name}"
 
 #DATABASE_URL = "postgresql://alberto:Alberto69.@db-testing.cmcatynqhv7p.us-east-1.rds.amazonaws.com/python_db"
 #DATABASE_URL = "postgresql://sinai:admin@postgreSQL/sinai_db"
-DATABASE_URL = "postgresql://sinai:admin@localhost/sinai_db"
+#DATABASE_URL = "postgresql://sinai:admin@localhost/sinai_db"
 
 
 engine = create_engine(DATABASE_URL)
