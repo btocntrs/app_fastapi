@@ -10,7 +10,8 @@ def get_proveedores(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Proveedor).offset(skip).limit(limit).all()
 
 def create_proveedor(db: Session, proveedor: schemas.Proveedor):
-    db_proveedor = models.Proveedor(rfc = proveedor.rfc, 
+    db_proveedor = models.Proveedor(id = proveedor.id,
+                                    rfc = proveedor.rfc, 
                                     razon_social = proveedor.razon_social,
                                     nombre_comercial = proveedor.nombre_comercial,
                                     productos = proveedor.productos,
