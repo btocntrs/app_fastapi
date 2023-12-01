@@ -70,9 +70,9 @@ def delete_proveedor(proveedor: schemas.Proveedor, db: Session = Depends(get_db)
         return deleted_proveedor
     raise HTTPException(status_code=404, detail="Proveedor no encontrado")
 
-@app.delete("/proveedores/{rfc}", response_model=schemas.Proveedor)
-def delete_proveedor(rfc: str, proveedor: schemas.Proveedor, db: Session = Depends(get_db)):
-    deleted_proveedor = crud.delete_proveedor(db, rfc, proveedor)
+@app.delete("/proveedores/{rfc}")
+def delete_proveedor(rfc: str, db: Session = Depends(get_db)):
+    deleted_proveedor = crud.delete_proveedor(db, rfc)
     if deleted_proveedor:
         return deleted_proveedor
     raise HTTPException(status_code=404, detail="Proveedor no encontrado")
