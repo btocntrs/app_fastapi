@@ -1,5 +1,13 @@
-fastapi
+# Dependencia para trabajar con postgres
 psycopg2-binary
+
+#Dependencias para trabajar con mysql
+#mysql-connector-python
+#pymysql
+#cryptography
+
+#Estas son las dependencias de fatpi necesarias para trabajar con base de datos
+fastapi
 pydantic
 SQLAlchemy
 uvicorn
