@@ -2,3 +2,4 @@ venv/
 __pycache__/
 key-fastapi-server.pem
 api-proveedores.pem
+app/test/
