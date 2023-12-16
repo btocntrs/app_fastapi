@@ -16,3 +16,5 @@ COPY ./app /API/app
 
 # Expone el puerto 8000 (o el que utilice tu aplicación FastAPI)
 EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
