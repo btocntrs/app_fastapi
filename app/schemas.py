@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+#Este clase crea una tabla en la base da datos si hace falta junto con la estructura de los datos
 class Proveedor(BaseModel):
     id: int | None = None
     rfc: str
