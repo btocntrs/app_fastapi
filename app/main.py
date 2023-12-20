@@ -42,7 +42,7 @@ def read_proveedor_by_rfc(rfc_proveedor: str, db: Session = Depends(get_db)):
 def create_proveedor(proveedor: schemas.Proveedor, db: Session = Depends(get_db)):
     db_proveedor = crud.get_proveedor_by_rfc(db, rfc=proveedor.rfc)
     if db_proveedor:
-        raise HTTPException(status_code=400, detail="Proveedor ya registrado")
+        raise HTTPException(status_code=409, detail="Proveedor ya registrado")
     return crud.create_proveedor(db=db, proveedor=proveedor)
 
 @app.put("/proveedores/", response_model=schemas.Proveedor)
