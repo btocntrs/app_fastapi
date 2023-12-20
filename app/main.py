@@ -38,7 +38,7 @@ def read_proveedor_by_rfc(rfc_proveedor: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Proveedor no encontrado")
     return db_proveedor
 
-@app.post("/proveedores/", response_model=schemas.Proveedor)
+@app.post("/proveedores/", response_model=schemas.Proveedor, status_code=201)
 def create_proveedor(proveedor: schemas.Proveedor, db: Session = Depends(get_db)):
     db_proveedor = crud.get_proveedor_by_rfc(db, rfc=proveedor.rfc)
     if db_proveedor:
