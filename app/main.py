@@ -25,7 +25,7 @@ def get_db():
     finally:
         db.close()
 
-# Metodo para proveedores
+# Este método obtiene la lista de proveedores completa
 @app.get("/proveedores/", response_model=list[schemas.Proveedor])
 def read_proveedores(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     proveedores = crud.get_proveedores(db, skip=skip, limit=limit)
