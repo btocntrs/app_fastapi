@@ -47,25 +47,29 @@ def create_proveedor(proveedor: schemas.Proveedor, db: Session = Depends(get_db)
 
 @app.put("/proveedores/", response_model=schemas.Proveedor)
 def update_proveedor(updated_proveedor: schemas.Proveedor, db: Session = Depends(get_db)):
-    db_proveedor = crud.update_proveedor(db, updated_proveedor.rfc, updated_proveedor)
-
+    db_proveedor = crud.get_proveedor_by_rfc(db, rfc=updated_proveedor.rfc)
+    
     if db_proveedor is None:
         raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    else:
+        db_proveedor = crud.update_proveedor(db, updated_proveedor.rfc, updated_proveedor)
 
     return db_proveedor
 
 @app.put("/proveedores/{rfc}", response_model=schemas.Proveedor)
 def update_proveedor(rfc: str, updated_proveedor: schemas.Proveedor, db: Session = Depends(get_db)):
-    db_proveedor = crud.update_proveedor(db, rfc, updated_proveedor)
-
+    db_proveedor = crud.get_proveedor_by_rfc(db, rfc=updated_proveedor.rfc)
+    
     if db_proveedor is None:
         raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    else:
+        db_proveedor = crud.update_proveedor(db, rfc, updated_proveedor)
 
     return db_proveedor
 
 @app.delete("/proveedores/", response_model=schemas.Proveedor)
 def delete_proveedor(proveedor: schemas.Proveedor, db: Session = Depends(get_db)):
-    deleted_proveedor = crud.delete_proveedor(db, proveedor.rfc, proveedor)
+    deleted_proveedor = crud.delete_proveedor(db, proveedor.rfc)
     if deleted_proveedor:
         return deleted_proveedor
     raise HTTPException(status_code=404, detail="Proveedor no encontrado")
