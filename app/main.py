@@ -13,4 +13,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Enturamos hacia el modulo de proveedores
 app.include_router(proveedores.router, prefix="/proveedores")
