@@ -1,5 +1,6 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
@@ -8,6 +9,7 @@ from .database import SessionLocal, engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+security = HTTPBearer()
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,7 +29,18 @@ def get_db():
 
 # Este método obtiene la lista de proveedores completa
 @app.get("/proveedores/", response_model=list[schemas.Proveedor], status_code=status.HTTP_200_OK)
-def read_proveedores(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def read_proveedores(skip: int = 0, limit: int = 100, db: 
+    Session = Depends(get_db), 
+    credentials: HTTPAuthorizationCredentials = Depends(security)):
+    
+    token = credentials.credentials
+    
+    if token != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Invalid Token"
+            )
+    
     proveedores = crud.get_proveedores(db, skip=skip, limit=limit)
     return proveedores
 
