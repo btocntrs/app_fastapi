@@ -31,6 +31,7 @@ def read_proveedores(skip: int = 0, limit: int = 100, db: Session = Depends(get_
     proveedores = crud.get_proveedores(db, skip=skip, limit=limit)
     return proveedores
 
+# Este get devuelve un proveedor por rfc
 @app.get("/proveedores/{rfc_proveedor}", response_model=schemas.Proveedor, status_code=status.HTTP_200_OK)
 def read_proveedor_by_rfc(rfc_proveedor: str, db: Session = Depends(get_db)):
     db_proveedor = crud.get_proveedor_by_rfc(db, rfc=rfc_proveedor)
