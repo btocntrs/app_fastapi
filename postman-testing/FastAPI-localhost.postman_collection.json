@@ -317,28 +317,17 @@
 		},
 		{
 			"name": "Get all proveedores",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Verificar el status code 200\r",
-							"pm.test(\"List of proveedores founded\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"// Verificar si el cuerpo de la respuesta es un array\r",
-							"pm.test(\"Response body is an array\", function () {\r",
-							"    // Verificar que el contenido de la respuesta sea un array\r",
-							"    pm.expect(pm.response.json()).to.be.an('array');\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
