@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      DB_USER: sinai
+      DB_USER: sinai_app
       DB_PASSWORD: admin
       DB_HOST: postgreSQL
       DB_NAME: sinai_db
@@ -16,7 +16,7 @@ services:
       - "8000:8000"
     networks:
       - postgresql_default
-    command: /bin/bash -c "uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    #command: /bin/bash -c "uvicorn app.main:app --host 0.0.0.0 --port 8000"
 
 networks:
   postgresql_default:
