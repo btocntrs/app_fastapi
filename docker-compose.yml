@@ -3,9 +3,10 @@ version: '3.8'
 services:
   app:
     container_name: fastapi-sinai
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: btocntrs/api-sinai
+    #build: 
+      #context: .
+      #dockerfile: Dockerfile
     restart: always
     environment:
       DB_USER: sinai_app
