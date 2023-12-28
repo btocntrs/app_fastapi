@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class Proveedor(BaseModel):
     id: int | None = None
-    rfc: str
+    rfc: str = Field(..., min_length=12, max_length=13)
     razon_social: str
     nombre_comercial: str | None = None
     productos: str
